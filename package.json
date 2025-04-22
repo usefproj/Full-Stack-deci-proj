@@ -1,0 +1,28 @@
+{
+  "name": "full-stack-deci-proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usefproj/Full-Stack-deci-proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/usefproj/Full-Stack-deci-proj/issues"
+  },
+  "homepage": "https://github.com/usefproj/Full-Stack-deci-proj#readme",
+  "devDependencies": {
+    "@types/jasmine": "^5.1.7",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "jasmine": "^5.6.0"
+  }
+}
