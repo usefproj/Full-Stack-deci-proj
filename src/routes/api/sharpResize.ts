@@ -5,12 +5,16 @@ import sharp from 'sharp';
 
 const resize = express.Router();
 
-export const resizer = async (img: string): Promise<string> => {
+export const resizer = async (
+  img: string,
+  width: number,
+  hieght: number,
+): Promise<string> => {
   const parsed = path.parse(img);
   const imgName = parsed.name;
   const outDir = path.resolve(__dirname, '../../../output-images');
   const inputFile = path.resolve(__dirname, `../../../images/${imgName}.jpg`);
-  const outputFile = path.join(outDir, `${imgName}-300x200.jpg`);
+  const outputFile = path.join(outDir, `${imgName}-${width}x${hieght}.jpg`);
 
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
@@ -21,7 +25,7 @@ export const resizer = async (img: string): Promise<string> => {
   }
 
   try {
-    await sharp(inputFile).resize(300, 200).toFile(outputFile);
+    await sharp(inputFile).resize(width, hieght).toFile(outputFile);
     return `✅ Saved resized image to ${outputFile}`;
   } catch (err) {
     console.error(err);
@@ -30,20 +34,20 @@ export const resizer = async (img: string): Promise<string> => {
 };
 
 resize.get('/:file', async (req, res) => {
+  const fileName: string = req.params.file;
+  const { width, height } = req.query;
   try {
-    await resizer(req.params.file);
+    await resizer(fileName, Number(width), Number(height));
 
     const outputFile = path.resolve(
       __dirname,
       '../../../output-images',
-      `${req.params.file}-300x200.jpg`,
+      `${fileName}-${width}x${height}.jpg`,
     );
 
-    // NO return here — we’re just sending the file
-    res.sendFile(outputFile);
+    res.status(200).sendFile(outputFile);
   } catch (err) {
     console.error(err);
-    // NO return here, either
     res.status(500).send('Image processing failed.');
   }
 });

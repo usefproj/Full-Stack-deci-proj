@@ -1,5 +1,5 @@
 import express from 'express';
-import resize from './api/sharp';
+import resize from './api/sharpResize';
 import uploader from './api/imageUp';
 const routes = express.Router();
 

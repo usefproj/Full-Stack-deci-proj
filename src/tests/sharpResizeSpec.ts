@@ -1,16 +1,12 @@
-// spec/sharp-endpoint-and-function.spec.ts
-
 import express from 'express';
 import request from 'supertest';
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp';
-import resizeRouter, { resizer } from '../routes/api/sharp';
+import resize, { resizer } from '../routes/api/sharpResize';
 
-describe('Resize API endpoint and resizer()', () => {
+describe('Checking the resize endpoint, and the resizer function', () => {
   const testImgName = 'jasmine-test';
 
-  // Match your router’s resolution logic via process.cwd()
   const imagesDir = path.join(process.cwd(), 'images');
   const outputDir = path.join(process.cwd(), 'output-images');
   const inputFile = path.join(imagesDir, `${testImgName}.jpg`);
