@@ -1,8 +1,11 @@
 import express from 'express';
 import routes from './routes';
+import cors from 'cors';
 
 const app = express();
 const PORT: number = 3000;
+
+app.use(cors());
 
 app.use('/api', routes);
 

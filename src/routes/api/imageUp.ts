@@ -1,12 +1,16 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 
 const uploader = express.Router();
-// setting up the storage
+const outDir = path.resolve(__dirname, `../../../images/uploaded-images`);
+if (!fs.existsSync(outDir)) {
+  fs.mkdirSync(outDir, { recursive: true });
+}
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, path.resolve(__dirname, `../../../images/uploaded-images`));
+    callback(null, outDir);
   },
   filename: function (req, file, callback) {
     const parsed = path.parse(file.originalname);
@@ -35,7 +39,7 @@ function checkFileType(file: any, cb: any) {
   }
 }
 uploader.post('/', upload, (req, res, next) => {
-  res.send('ss');
+  res.redirect(301, 'http://example.com');
 });
 
 export default uploader;

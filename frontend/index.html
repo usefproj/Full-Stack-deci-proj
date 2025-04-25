@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello, World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="bg-teal-600 p-20">
+      <h1 class="text-4xl text-white text-center font-bold">
+        Get these images rolling
+      </h1>
+    </header>
+    <section class="bg-gray-200 p-4">
+      <h2 class="text-teal-400 text-center text-3xl font-semibold">
+        Upload your images!
+      </h2>
+      <form
+        class="bg-gray-200 px-20 py-5"
+        action="http://localhost:3000/api/upload"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="image" class="bg-teal-600 rounded-md border" />
+        <button
+          type="submit"
+          class="outline-none bg-teal-600 px-2 py-1 rounded-md"
+        >
+          Upload
+        </button>
+      </form>
+    </section>
+    <section class="bg-black px-5 py-2">
+      <h2 class="text-3xl font-semibold text-center text-white m-3">
+        Your awesome gallery
+      </h2>
+      <div
+        class="flex flex-row flex-wrap gap-3 justify-center"
+        id="img-container"
+      ></div>
+      <p class="text-white p-2">click to select an image to resize</p>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>
