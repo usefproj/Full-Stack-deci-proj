@@ -4,10 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const routes_1 = __importDefault(require("./routes"));
-const app = (0, express_1.default)();
-const PORT = 3000;
-app.use('/api', routes_1.default);
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+const image = express_1.default.Router();
+image.get('/img', (req, res) => {
+    res.send('image');
 });
+exports.default = image;

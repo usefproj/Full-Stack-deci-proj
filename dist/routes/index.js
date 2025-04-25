@@ -4,10 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const routes_1 = __importDefault(require("./routes"));
-const app = (0, express_1.default)();
-const PORT = 3000;
-app.use('/api', routes_1.default);
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+const sharp_1 = __importDefault(require("./api/sharp"));
+const imageUp_1 = __importDefault(require("./api/imageUp"));
+const routes = express_1.default.Router();
+routes.use('/img', sharp_1.default);
+routes.use('/upload', imageUp_1.default);
+exports.default = routes;
