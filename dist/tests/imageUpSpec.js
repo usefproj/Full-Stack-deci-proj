@@ -23,13 +23,10 @@ describe('Image Uploader', () => {
     let app;
     let jpgBuffer;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        // Ensure upload dir exists
         if (!fs_1.default.existsSync(uploadDir)) {
             fs_1.default.mkdirSync(uploadDir, { recursive: true });
         }
-        // Clean up any leftovers
         fs_1.default.readdirSync(uploadDir).forEach((f) => fs_1.default.unlinkSync(path_1.default.join(uploadDir, f)));
-        // Create a tiny in-memory JPEG
         jpgBuffer = yield (0, sharp_1.default)({
             create: {
                 width: 5,
@@ -55,8 +52,7 @@ describe('Image Uploader', () => {
         expect(res.status).toBe(200);
         const files = fs_1.default.readdirSync(uploadDir);
         expect(files.length).toBe(1);
-        // Updated regex: one hyphen, then digits, then .jpg
-        expect(files[0]).toMatch(/^photo-\d+\.jpg$/); // ← fixed line :contentReference[oaicite:6]{index=6}
+        expect(files[0]).toMatch(/^photo-\d+\.jpg$/);
     }));
     it('should reject non-.jpg uploads with a 500 error', () => __awaiter(void 0, void 0, void 0, function* () {
         const fakePng = Buffer.from('not a jpeg');
@@ -64,8 +60,8 @@ describe('Image Uploader', () => {
             .post('/upload')
             .attach('image', fakePng, 'image.png');
         expect(res.status).toBe(500);
-        expect(res.text).toContain('Only .jpg images are allowed!'); // from fileFilter :contentReference[oaicite:7]{index=7}
+        expect(res.text).toContain('Only .jpg images are allowed!');
         const files = fs_1.default.readdirSync(uploadDir);
-        expect(files.length).toBe(1); // still only the one from the first test
+        expect(files.length).toBe(1);
     }));
 });

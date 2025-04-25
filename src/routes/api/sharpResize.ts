@@ -8,13 +8,13 @@ const resize = express.Router();
 export const resizer = async (
   img: string,
   width: number,
-  hieght: number,
+  height: number,
 ): Promise<string> => {
   const parsed = path.parse(img);
   const imgName = parsed.name;
   const outDir = path.resolve(__dirname, '../../../output-images');
   const inputFile = path.resolve(__dirname, `../../../images/${imgName}.jpg`);
-  const outputFile = path.join(outDir, `${imgName}-${width}x${hieght}.jpg`);
+  const outputFile = path.join(outDir, `${imgName}-${width}x${height}.jpg`);
 
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
@@ -25,7 +25,7 @@ export const resizer = async (
   }
 
   try {
-    await sharp(inputFile).resize(width, hieght).toFile(outputFile);
+    await sharp(inputFile).resize(width, height).toFile(outputFile);
     return `✅ Saved resized image to ${outputFile}`;
   } catch (err) {
     console.error(err);
