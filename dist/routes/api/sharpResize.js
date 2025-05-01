@@ -45,7 +45,7 @@ resize.get('/:file', (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const { width, height } = req.query;
     try {
         yield (0, exports.resizer)(fileName, Number(width), Number(height));
-        const outputFile = path_1.default.resolve(__dirname, '../../../output-images', `${fileName}-${width}x${height}.jpg`);
+        const outputFile = yield path_1.default.resolve(__dirname, '../../../output-images', `${fileName}-${width}x${height}.jpg`);
         res.status(200).sendFile(outputFile);
     }
     catch (err) {

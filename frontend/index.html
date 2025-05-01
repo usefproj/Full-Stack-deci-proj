@@ -12,17 +12,18 @@
         Get these images rolling
       </h1>
     </header>
+
     <section class="bg-gray-200 p-4">
       <h2 class="text-teal-400 text-center text-3xl font-semibold">
         Upload your images!
       </h2>
-      <form
-        class="bg-gray-200 px-20 py-5"
-        action="http://localhost:3000/api/upload"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        <input type="file" name="image" class="bg-teal-600 rounded-md border" />
+      <form id="upload-form" class="bg-gray-200 px-20 py-5">
+        <input
+          type="file"
+          name="image"
+          class="bg-teal-600 rounded-md border"
+          required
+        />
         <button
           type="submit"
           class="outline-none bg-teal-600 px-2 py-1 rounded-md"
@@ -30,7 +31,10 @@
           Upload
         </button>
       </form>
+      <!-- Placeholder for showing the API URL -->
+      <div id="upload-result" class="mt-4 text-center"></div>
     </section>
+
     <section class="bg-black px-5 py-2">
       <h2 class="text-3xl font-semibold text-center text-white m-3">
         Your awesome gallery
@@ -41,6 +45,17 @@
       ></div>
       <p class="text-white p-2">click to select an image to resize</p>
     </section>
+
+    <div id="resized-container" class="mt-4">
+      <p>No image selected yet.</p>
+      <img
+        id="resized-image"
+        src=""
+        alt="Resized preview"
+        class="rounded-md hidden"
+      />
+    </div>
+
     <script src="index.js"></script>
   </body>
 </html>

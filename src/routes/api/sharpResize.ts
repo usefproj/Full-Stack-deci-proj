@@ -38,11 +38,11 @@ resize.get('/:file', async (req, res) => {
   const { width, height } = req.query;
   try {
     await resizer(fileName, Number(width), Number(height));
-
+    const { name: imgName } = path.parse(fileName);
     const outputFile = await path.resolve(
       __dirname,
       '../../../output-images',
-      `${fileName}-${width}x${height}.jpg`,
+      `${imgName}-${width}x${height}.jpg`,
     );
 
     res.status(200).sendFile(outputFile);
